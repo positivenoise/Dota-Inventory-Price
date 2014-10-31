@@ -4,11 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_openid import OpenID
 import urllib, urllib2
 import re
-
 app = Flask(__name__)
 app.config.update(
     SQLALCHEMY_DATABASE_URI = 'sqlite:///flask-openid.db',
-    SECRET_KEY = 'YOUR KEY HERE',
+    SECRET_KEY = 'D4FA9B213467DC3F93032BB4627D1FD5',
     DEBUG = True,
     PORT = 5000
 )
@@ -72,7 +71,14 @@ def new_user(resp):
 def logout():
     session.pop('user_id', None)
     return redirect(oid.get_next_url())
-
+@app.route('/inventory')
+def inv():
+    if g.user:
+        url = "http://steamcommunity.com/profiles/" + g.user.steam_id + "/inventory/json/570/2"
+        jsondata = json.loads(urllib2.urlopen(url).read())
+        return render_template('inventory.html', data = jsondata['rgDescriptions'], userdata = g.user)
+    else:
+        return render_template('cover.html')
 @app.route('/')
 def hello():
     if g.user:

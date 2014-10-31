@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,8 +44,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href='/inventory'>Inventory</a></li>
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/inventory">Inventory</a></li>
             <li><a href='/logout'>Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -53,8 +55,14 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Welcome {{data.nickname}}</h1>
-        <p class="lead">Your steam ID is: {{data.steam_id}} Please make sure your inventory is set to public, and watch the cool shit happen.</p>
+        <h1>{{userdata.nickname}}</h1>
+        <table class="table table-striped">
+        <thead><tr><th>Name</th><th>Hero</th><th>Rarity</th></tr></thead>
+       {% for key,value in data.items() %}
+        <tr><td>{{value['market_name']}}</td> <td>{{value['tags'][4]['name'] }}</td><td> {{value['tags'][1]['name']}}</td></tr>
+       {% endfor %}
+
+        </table>
       </div>
 
     </div><!-- /.container -->
