@@ -7,7 +7,7 @@ import re
 app = Flask(__name__)
 app.config.update(
     SQLALCHEMY_DATABASE_URI = 'sqlite:///flask-openid.db',
-    SECRET_KEY = 'D4FA9B213467DC3F93032BB4627D1FD5',
+    SECRET_KEY = 'YOUR KEY HERE',
     DEBUG = True,
     PORT = 5000
 )
